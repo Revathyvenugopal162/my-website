@@ -1,210 +1,154 @@
 % !TeX spellcheck = en_GB
 % !TeX program = pdflatex
 %
-% LuxSleek-CV 1.1 LaTeX template
-% Author: Andreï V. Kostyrka, University of Luxembourg
-%
-% 1.1: added tracking and letter-spacing for prettier lower caps, added `~` for language levels
-% 1.0: initial release
-%
-% This template fills the gap in the available variety of templates
-% by proposing something that is not a custom class, not using any
-% hard-coded settings deeply hidden in style files, and provides
-% a handful of custom command definitions that are as transparent as it gets.
-% Developed at the University of Luxembourg.
-%
-% *NOTHING IS HARCODED, and never should be.*
-%
-% Target audience: applicants in the IT industry, or business in general
-%
-% The main strength of this template is, it explicitly showcases how
-% to break the flow of text to achieve the most flexible right alignment
-% of dates for multiple configurations.
+% Single-column professional CV.
 
-\documentclass[11pt, a4paper]{article} 
+\documentclass[10.5pt, a4paper]{article}
 
-\usepackage[T1]{fontenc}     % We are using pdfLaTeX,
-\usepackage[utf8]{inputenc}  % hence this preparation
-\usepackage[british]{babel}  
-\usepackage[left = 0mm, right = 0mm, top = 0mm, bottom = 0mm]{geometry}
-\usepackage[stretch = 25, shrink = 25, tracking=true, letterspace=30]{microtype}  
-\usepackage{graphicx}        % To insert pictures
-\usepackage{xcolor}          % To add colour to the document
-\usepackage{marvosym}        % Provides icons for the contact details
-\usepackage[scale=0.95]{sourcecodepro}
-\usepackage{ragged2e}
-\usepackage{tabularx} 
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage[top = 11mm, bottom = 11mm, left = 15mm, right = 15mm, footskip = 0pt]{geometry}
+\usepackage[stretch = 25, shrink = 25, tracking = true]{microtype}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{enumitem}
 
-\usepackage{enumitem}        % To redefine spacing in lists
-\setlist{parsep = 0pt, topsep = 0pt, partopsep = 1pt, itemsep = 1pt, leftmargin = 6mm}
-
-\usepackage{FiraSans}        % Change this to use any font, but keep it simple
+\usepackage{FiraSans}
 \renewcommand{\familydefault}{\sfdefault}
 
-\definecolor{cvblue}{HTML}{304263}
+\definecolor{ink}{HTML}{1A1A1A}
+\definecolor{accent}{HTML}{1F3864}
+\definecolor{subtle}{HTML}{5A5A5A}
+\definecolor{hairline}{HTML}{C4C4C4}
 
-%%%%%%% USER COMMAND DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%
-% These are the real workhorses of this template
-\newcommand{\dates}[1]{\hfill\mbox{\textbf{#1}}} % Bold stuff that doesn’t got broken into lines
-\newcommand{\is}{\par\vskip.5ex plus .4ex} % Item spacing
-\newcommand{\smaller}[1]{{\small$\diamond$\ #1}}
-\newcommand{\headleft}[1]{\vspace*{3ex}\textsc{\textbf{#1}}\par%
-    \vspace*{-1.5ex}\hrulefill\par\vspace*{0.7ex}}
-\newcommand{\headright}[1]{\vspace*{2.5ex}\textsc{\Large\color{cvblue}#1}\par%
-     \vspace*{-2ex}{\color{cvblue}\hrulefill}\par}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[colorlinks = true, urlcolor = accent, linkcolor = accent]{hyperref}
 
-\usepackage[colorlinks = true, urlcolor = white, linkcolor = white]{hyperref}
+\color{ink}
+\pagestyle{empty}
+\frenchspacing
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{0pt}
+
+%%%%%%% SECTION HEADINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titleformat{\section}
+    {\large\bfseries\color{accent}}{}{0em}{\scshape\textls[40]}
+    [\vspace{-0.9ex}{\color{hairline}\titlerule[0.7pt]}]
+\titlespacing*{\section}{0pt}{1.8ex plus .3ex}{1.3ex}
+
+%%%%%%% LISTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlist[itemize]{leftmargin = 3.8mm, labelsep = 1.8mm, topsep = 0.5ex,
+    itemsep = 0.45ex, parsep = 0pt, partopsep = 0pt,
+    label = \textcolor{accent}{\footnotesize\raisebox{0.15ex}{$\bullet$}}}
+
+%%%%%%% BUILDING BLOCKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \entry{role}{organisation, location}{dates}
+\newcommand{\entry}[3]{%
+    \begin{tabularx}{\textwidth}{@{}Xr@{}}
+        \textbf{#1} & \small\bfseries\color{accent}#3 \\[-0.3ex]
+        \small\color{subtle}#2 &                      \\
+    \end{tabularx}}
+
+% \line{left}{right} -- generic two-column row for talks, education, etc.
+\newcommand{\row}[2]{%
+    \begin{tabularx}{\textwidth}{@{}Xr@{}}
+        #1 & \small\color{subtle}#2 \\
+    \end{tabularx}}
+
+% \skill{label}{values}
+\newcommand{\skill}[2]{\textbf{\small #1} & \small #2 \\[0.55ex]}
+
+\newcommand{\sep}{\;\textcolor{hairline}{\textbullet}\;}
+
 
 \begin{document}
 
-% Style definitions -- killing the unnecessary space and adding the skips explicitly
-\setlength{\topskip}{0pt}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt}
-\setlength{\fboxsep}{0pt}
-\pagestyle{empty}
-\raggedbottom
+%%%%%%% HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.80\textwidth}
+{\fontsize{25}{27}\selectfont\bfseries\textls[50]{REVATHY VENUGOPAL}}
 
-\begin{minipage}[t]{0.33\textwidth} %% Left column -- outer definition
-%  Left column -- top dark rectangle
-\colorbox{cvblue}{\begin{minipage}[t][5mm][t]{\textwidth}\null\hfill\null\end{minipage}}
+\vspace{1.1ex}
+{\large\color{accent}R\&D Engineer \sep Python, APIs \& Applied AI}
 
-\vspace{-.2ex} % Eliminates the small gap
-\colorbox{cvblue!90}{\color{white}  %% LEFT BOX
-\kern0.09\textwidth\relax% Left margin provided explicitly
-\begin{minipage}[t][293mm][t]{0.82\textwidth}
-\raggedright
-\vspace*{2.5ex}
-
-\Large Revathy \textbf{\textsc{Venugopal}} \normalsize 
-
-% Centering without extra vertical spacing
-\null\hfill\includegraphics[width=0.80\textwidth]{image.jpeg}\hfill\null
-
-\vspace*{0.5ex} % Extra space after the picture
-
-\headleft{Profile}
-Backend-focused Python engineer and open-source contributor with experiance building developer-facing APIs, AI-powered systems, and scalable platforms. Core contributor to PyAnsys, working on AI intergartions, agentic workflows and automation tools for engineering applications. 
-
-\headleft{Contact details}
-\small % To fit more content
-\MVAt\ {\small revathyvenugopal162@gmail.com} \\[0.4ex]
-\Mundus\ \href{https://github.com/Revathyvenugopal162}{github.com/revathyvenugopal162} \\[0.1ex]
-\Letter\ Lyon, France
-\normalsize
-
-\headleft{Personal information}
-%Year of birth: \textbf{1861} \\[0.5ex]
-Citizenship: \textbf{Indian} \\[0.5ex]
-Languages: \textbf{English}~(C1), \textbf{French}~(B1)
-\normalsize
-
-\headleft{Skills}
-\small
-
-\vspace{0.5ex}
-\textbf{Programming}\\
-\vspace{0.5ex}
-\begin{tabularx}{\linewidth}{X}
-$\cdot$ Python $\cdot$ JavaScript $\cdot$ C \\ $\cdot$ HTML $\cdot$ CSS 
-\end{tabularx}
-
-\vspace{0.5ex}
-\textbf{Soft Skills}\\
-\vspace{0.5ex}
-\begin{tabularx}{\linewidth}{X}
-$\cdot$ Problem-solving $\cdot$ Teamwork \\ $\cdot$ Communication $\cdot$ Adaptability \\ $\cdot$ Leadership $\cdot$ Creativity \\
-\end{tabularx}
-
-\vspace{0.5ex}
-\textbf{Tools and frameworks}\\
-\vspace{0.5ex}
-\begin{tabularx}{\linewidth}{X}
-$\cdot$ GitHub $\cdot$ Bitbucket \\ $\cdot$ Sphinx $\cdot$ CI/CD \\ $\cdot$ FastAPI $\cdot$ Flask \\ $\cdot$ MCP $\cdot$ Docker \\ $\cdot$ TensorFlow $\cdot$ PyTorch \\ $\cdot$ OpenCV $\cdot$ LaTeX
-\end{tabularx}
-
-
-\vspace{0.5ex}
-\textbf{Languages}\\
-\vspace{0.5ex}
-\begin{tabularx}{\linewidth}{X}
-$\cdot$ English $\cdot$ French
-\end{tabularx}
-
-\vspace{1.5ex}
-
-
-\end{minipage}%
-\kern0.09\textwidth\relax%%Right margin provided explicitly to stretch the colourbox
+\vspace{1.6ex}
+{\small\color{subtle}%
+\faMapMarker*\ Lyon, France \sep
+\faEnvelope[regular]\ \href{mailto:revathyvenugopal162@gmail.com}{revathyvenugopal162@gmail.com} \sep
+\faGithub\ \href{https://github.com/Revathyvenugopal162}{Revathyvenugopal162}\\[0.7ex]
+\faLinkedinIn\ \href{https://www.linkedin.com/in/revathy-venugopal-3310b5147/}{linkedin.com/in/revathy-venugopal} \sep
+\faGlobe\ \href{https://revathyvenugopal162.github.io}{revathyvenugopal162.github.io}%
 }
-\end{minipage}% Right column
-\hskip2.5em% Left margin for the white area
-\begin{minipage}[t]{0.56\textwidth}
-\setlength{\parskip}{0.4ex}% Adds spaces between paragraphs; use \\ to add new lines without this space. Shrink this amount to fit more data vertically
+\end{minipage}\hfill
+\begin{minipage}[c]{0.16\textwidth}
+\includegraphics[width=\textwidth]{image.jpeg}
+\end{minipage}
 
 \vspace{2ex}
+{\color{accent}\hrule height 1.1pt}
 
-\headright{Experience}
+%%%%%%% SUMMARY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1.6ex}
+Python engineer and open-source maintainer with four years of experience building developer-facing APIs,
+applied-AI systems and large documentation platforms for engineering software. Focused on LLM and RAG
+pipelines, agentic workflows, MCP tooling and open-source automation. Speaker at SciPy and EuroSciPy.
 
-\textbf{R\&D Engineer,} \textsc{PyAnsys Core Team} \hfill \textit{Ansys (Lyon)} \dates{2022.05--pres.} \\
+%%%%%%% EXPERIENCE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Experience}
+
+\entry{R\&D Engineer, Core Python Team}{Ansys \sep Lyon, France}{May 2022 -- Present}
 \begin{itemize}
-    \item Designed and built developer tools and libraries for engineering simulation workflows (Python, Sphinx, CI/CD)
-    \item Architected agentic workflows for engineering applications using LLMs and RAG techniques; integrated MCP for better tool orchestration
-    \item Built a multi-tenant API service enabling dynamic index loading and scalable deployment
-    \item Architected advanced search (Fuse.js, MeiliSearch) and high-performance APIs for documentation themes
-    \item Maintainer for PyDyna: API design, development, open-source community support, and release management
-    \item Collaborated with cross-functional teams on API design decisions and long-term maintainability
+    \item \textbf{Applied AI.} Designed RAG pipelines and agentic LLM workflows for engineering applications, covering document chunking, embeddings, vector retrieval, hybrid semantic and keyword search, and response evaluation; exposed internal capabilities to AI assistants through Model Context Protocol (MCP) servers.
+    \item \textbf{Backend services.} Built a multi-tenant API service with dynamic index loading, giving each tenant an isolated and horizontally scalable deployment.
+    \item \textbf{Search platform.} Re-architected documentation search from a Python scraper with a MeiliSearch backend to a build-time static index served by Fuse.js, removing authentication, VPN and multi-version re-indexing constraints.
+    \item \textbf{Developer automation.} Built a GitHub CLA bot that automates contributor licence agreement signing, verification and pull-request status checks across the organisation's public repositories.
+    \item \textbf{Libraries and tooling.} Ship Python packages, project templates, reusable CI/CD actions and release automation used across the ecosystem, plus the shared documentation theme and API-reference templates.
+    \item \textbf{Ownership.} Maintain a public Python simulation library end to end: API design, code review, releases and community support; lead design reviews and mentor new contributors.
 \end{itemize}
 
-\is
-\textbf{Machine Learning \& Robotics Intern} \hfill \textit{SITIA Robotique (Nantes).} \dates{2021.09--2022.03} \\
+\vspace{1.4ex}
+\entry{Machine Learning \& Robotics Intern}{SITIA Robotique \sep Nantes, France}{Sep 2021 -- Mar 2022}
 \begin{itemize}
-    \item Developed Python software for robot vision and obstacle avoidance (TensorFlow, OpenCV).
-    \item Implemented real-time algorithms for autonomous navigation.
+    \item Built Python computer-vision software for obstacle detection and classification using TensorFlow and OpenCV.
+    \item Implemented real-time perception and Kalman-filter-based speed control for autonomous agricultural robots.
 \end{itemize}
 
-\is
-\textbf{Graduate Engineer Trainee} \hfill \textit{BPCL Kochi Refinery (Kerala, India).} \\
-\dates{2019.06--2019.08} \\
+%%%%%%% OPEN SOURCE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Open source}
 \begin{itemize}
-    \item Performed electrical maintenance, troubleshooting, and repair of electrical equipment.
-    \item Assisted in the installation and commissioning of new electrical systems.
+    \item Core team of a large open-source Python ecosystem: shared libraries, project templates, CI/CD actions and release automation.
+    \item Maintainer of a public simulation library: feature development, issue triage, documentation and releases.
+    \item Author of a documentation theme with a built-in static search engine and automated API-reference templates, and of a Python indexer that makes MeiliSearch practical for multi-version documentation.
 \end{itemize}
 
+%%%%%%% SPEAKING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Speaking}
 
-\headright{Education}
-\textbf{Master of Science in Embedded Systems.} \textit{ESIGELEC, Rouen.}  \dates{2020--2022} \\
-\begin{itemize}
-    \item Embedded systems, software development, machine learning, robotics, computer vision.
-\end{itemize}
-\textbf{Masters degree, Automotive Embedded System.} \textit{Manipal School of Information Sciences.}  \dates{2020--2021} \\
-\begin{itemize}
-    \item Automotive embedded systems, software development, machine learning, robotics, computer vision, IOT, embedded C, Real-time operating systems.
-\end{itemize}
-\textbf{Bachelor of Technology in Electrical and Electronics Engineering.} \textit{College of engineering, Munnar}  \dates{2016--2020} \\
-\begin{itemize}
-    \item Electrical and electronics engineering, power systems, electrical machines, control systems, power electronics.
-\end{itemize}
+\row{\textbf{Sphinx Themes for Documentation} \sep \href{https://youtu.be/QU8YCFO6qWM?t=4099}{watch}}{EuroSciPy 2025, Krak\'ow}
+\row{\textbf{AutoAPI Templates with Sphinx Themes}}{SciPy 2024, Tacoma}
+\row{\textbf{PyMeiliSearch}, lightning talk \sep \href{https://youtu.be/RuIk3Wq2Pg0}{watch}}{SciPy 2023, Austin}
 
+%%%%%%% SKILLS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Skills}
 
+\begin{tabularx}{\textwidth}{@{}p{26mm}X@{}}
+\skill{AI \& ML}{LLMs \sep RAG \sep agentic workflows \sep MCP \sep embeddings \sep vector stores \sep prompt engineering \sep TensorFlow \sep PyTorch \sep OpenCV}
+\skill{Programming}{Python \sep JavaScript \sep C \sep HTML \sep CSS}
+\skill{Backend \& web}{FastAPI \sep Flask \sep REST APIs \sep asyncio \sep pytest \sep Fuse.js \sep MeiliSearch}
+\skill{Platform}{Git \sep GitHub Actions \sep CI/CD \sep Docker \sep Sphinx \sep LaTeX}
+\skill{Languages}{English (C1) \sep French (B1)}
+\end{tabularx}
 
-\headright{Additional education}
+%%%%%%% EDUCATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Education \& certifications}
 
-\textsc{Using Python to Access Web Data.}
-\textit{Coursera.} \dates{2021} \\
-\smaller{Python, web data, web scraping, web services, XML, JSON.}
+\row{\textbf{MSc, Embedded Systems} \sep ESIGELEC, Rouen}{2020 -- 2022}
+\row{\textbf{MSc, Automotive Embedded Systems} \sep Manipal School of Information Sciences}{2020 -- 2021}
+\row{\textbf{BTech, Electrical \& Electronics Engineering} \sep College of Engineering, Munnar}{2016 -- 2020}
 
-\is
-\textsc{Introduction to Programming Using Python.}
-\textit{Coursera.} \dates{2020} \\
-\smaller{Python, programming, data structures, algorithms.}
-
-\is
-\textsc{Python Data Structures.}
-\textit{Coursera.} \dates{2020} \\
-\smaller{Python, data structures, algorithms, programming.}
-
-\end{minipage}
+\vspace{0.6ex}
+\row{Embeddings \& vector spaces in RAGs \sep Docker and Kubernetes \sep \textit{Pluralsight}}{2023 -- 2024}
 
 \end{document}
