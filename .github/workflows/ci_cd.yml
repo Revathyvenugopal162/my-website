@@ -4,10 +4,10 @@ on:
   pull_request:
   workflow_dispatch:
   push:
-    tags:
-      - "*"
-    branches:
-      - main
+    # tags:
+    #   - "*"
+    # branches:
+    #   - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
